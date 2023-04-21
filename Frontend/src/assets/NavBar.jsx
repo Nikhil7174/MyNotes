@@ -1,12 +1,20 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const NavBar = () => {
   // const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
   const [enable, setEnable] = useState(false);
+  let location = useLocation();
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
+
   return (
     <>
-      <nav className="navbar flex justify-start  items-center p-auto fixed top-0 left-0 right-0 shadow-md w-full bg-gray-200/80  backdrop-blur-md lg:bg-white lg:justify-start " style={{position:"relative"}}>
+      <nav
+        className="navbar flex justify-start  items-center p-auto fixed top-0 left-0 right-0 shadow-md w-full bg-gray-200/80  backdrop-blur-md lg:bg-white lg:justify-start "
+        style={{ position: "relative" }}
+      >
         <div className="flex justify-center items-center lg:order-2">
           <div
             onClick={() => setEnable(!enable)}
@@ -44,7 +52,9 @@ const NavBar = () => {
               }
             >
               <img src="/icons8-canvas-student-32.png" alt="" />
-              NewsBite
+              <div className={`${location.pathname === "/" ? "myFocus" : ""}`}>
+                MyNotes
+              </div>
             </div>
           </Link>
           <div
@@ -55,13 +65,22 @@ const NavBar = () => {
             }
           >
             <a href="/">
-              <div className="mt-5 lg:hidden font-semibold w-32 font-sans flex items-center ">
+              <div
+                className={`mt-5 lg:hidden font-semibold w-32 font-sans flex items-center ${
+                  location.pathname === "/about" ? "myFocus" : ""
+                }`}
+              >
                 <img src="/icons8-canvas-student-32.png" alt="" />
-                Home
+                MyNotes
               </div>
             </a>
             <a href="/about">
-              <div className="fitem cursor-pointer hover:underline hover:underline-offset-4 active:text-blue-500">
+              <div
+                className={`fitem cursor-pointer hover:underline hover:underline-offset-4  ${
+                  location.pathname === "/about" ? "myFocus" : ""
+                }`}
+                tabIndex={"1"}
+              >
                 About
               </div>
             </a>

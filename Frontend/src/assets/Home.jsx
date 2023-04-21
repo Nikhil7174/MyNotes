@@ -1,7 +1,9 @@
-import React from 'react'
+import Notes from "./Notes";
 
 export default function Home() {
   return (
-    <div style={{position:"inherit"}}>Home</div>
-  )
+    <div style={{ position: "inherit" }}>
+      <Notes />
+    </div>
+  );
 }
