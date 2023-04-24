@@ -24,6 +24,7 @@ export default function Noteitem(props) {
           className="fa-solid fa-trash mx-2 cursor-pointer"
           onClick={() => {
             deleteNote(note._id);
+            props.showAlert("Deleted successfully!", "Warning");
           }}
         ></i>
         <i

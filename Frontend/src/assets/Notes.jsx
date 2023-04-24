@@ -2,12 +2,18 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import NoteContext from "../context/notes/NoteContext";
 import Noteitem from "./Noteitem";
 import AddNote from "./AddNote";
+import { useNavigate } from "react-router-dom";
 
-export default function Notes() {
+export default function Notes(props) {
   const context = useContext(NoteContext);
   const { notes, getNotes, editNote } = context;
+  let navigate = useNavigate();
   useEffect(() => {
-    getNotes();
+    if (localStorage.getItem("token") != null) {
+      getNotes();
+    } else {
+      navigate("/login");
+    }
   }, []);
 
   const [enable, setEnable] = useState(false);
@@ -36,6 +42,7 @@ export default function Notes() {
     console.log("Updating the note ...", note);
     editNote(note.id, note.etitle, note.edescription, note.etag);
     refclose.current.click();
+    props.showAlert("Updated successfully!", "Success");
     // addNote(note.title, note.description, note.tag);
   };
   const onChange = (e) => {
@@ -102,6 +109,8 @@ export default function Notes() {
                   name="etitle"
                   onChange={onChange}
                   value={note.etitle}
+                  // minLength={1}
+                  // required
                 />
               </div>
               <div className="mb-4">
@@ -119,6 +128,8 @@ export default function Notes() {
                   name="edescription"
                   onChange={onChange}
                   value={note.edescription}
+                  // minLength={1}
+                  // required
                 />
               </div>
 
@@ -149,6 +160,9 @@ export default function Notes() {
                   Close
                 </button>
                 <button
+                  disabled={
+                    note.etitle.length < 1 || note.edescription.length < 1
+                  }
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="button"
                   onClick={handleClick}
@@ -164,8 +178,9 @@ export default function Notes() {
         </div>
       </div>
       <div className={enable ? "hidden" : ""}>
-        <AddNote />
+        <AddNote showAlert={props.showAlert} />
       </div>
+      <h2 className="flex justify-center my-8 font-bold text-lg">Your Notes</h2>
       <div
         className={
           enable
@@ -173,8 +188,16 @@ export default function Notes() {
             : "w-full max-w-[65rem] mx-auto flex flex-wrap flex-row my-3 justify-center columns-3 space-x-3"
         }
       >
+        {notes.length === 0 && "No notes to Display"}
         {notes.map((note, index) => {
-          return <Noteitem key={index} updateNote={updateNote} note={note} />;
+          return (
+            <Noteitem
+              key={index}
+              showAlert={props.showAlert}
+              updateNote={updateNote}
+              note={note}
+            />
+          );
         })}
       </div>
     </>

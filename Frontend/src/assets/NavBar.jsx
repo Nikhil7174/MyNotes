@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   // const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
@@ -8,6 +8,12 @@ const NavBar = () => {
   useEffect(() => {
     console.log(location);
   }, [location]);
+
+  let navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <>
@@ -42,7 +48,7 @@ const NavBar = () => {
             <img src="/search.svg" className="w-6" alt="" />
           </div> */}
         </div>
-        <div className="logo text-center lg:order-1 flex">
+        <div className="logo text-center lg:order-1 flex justify-around w-[100%]">
           <Link to="/">
             <div
               className={
@@ -52,7 +58,9 @@ const NavBar = () => {
               }
             >
               <img src="/icons8-canvas-student-32.png" alt="" />
-              <div className={`${location.pathname === "/" ? "myFocus" : ""}`}>
+              <div
+                className={`${location.pathname === "/" ? "myFocus" : ""} mt-1`}
+              >
                 MyNotes
               </div>
             </div>
@@ -115,8 +123,41 @@ const NavBar = () => {
               </div>
             </a>
           </div>
+          <div
+            className={
+              enable
+                ? "features absolute pb-10  items-center space-y-4  w-auto justify-center h-fit  bg-gray-500 text-white flex flex-col inset-0 transition-all  -translate-x-196 mr-5 "
+                : "features absolute lg:static w-fit lg:w-auto bg-gray-200 lg:bg-white inset-0 lg:flex lg:mx-4  lg:space-x-4  -translate-x-96 lg:translate-x-0 lg:justify-center lg:p-[1rem]"
+            }
+          >
+            {!localStorage.getItem("token") ? (
+              <div className="flex flex-row space-x-5">
+                <a href="/login">
+                  <div className="fitem cursor-pointer hover:underline hover:underline-offset-4 active:text-blue-500">
+                    Login
+                  </div>
+                </a>
+                <a href="/signup">
+                  <div className="fitem cursor-pointer hover:underline hover:underline-offset-4 active:text-blue-500">
+                    Sign Up
+                  </div>
+                </a>
+              </div>
+            ) : (
+              <a>
+                <div
+                  onClick={handleLogout}
+                  className="fitem cursor-pointer hover:underline hover:underline-offset-4 active:text-blue-500"
+                >
+                  Logout
+                </div>
+              </a>
+            )}
+          </div>
         </div>
+
         <div></div>
+
         {/* <div className="cart text-center lg:order-3 flex">
           <div className="search hidden lg:flex ">
             All Microsoft
