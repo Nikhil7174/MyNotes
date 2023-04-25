@@ -29,8 +29,8 @@ export default function SignUp(props) {
     console.log(json);
     if (json.success === true) {
       // save the authtoken and redirect
-      localStorage.setItem("token", json.authtoken);
-      navigate("/login");
+      localStorage.setItem("token", json.authData);
+      navigate("/");
       props.showAlert("Account created successfully", "Success");
     } else {
       props.showAlert("Invalid Credentials", "Warning");
