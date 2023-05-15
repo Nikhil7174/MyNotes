@@ -92,36 +92,6 @@ const NavBar = () => {
                 About
               </div>
             </a>
-            <a href="/entertainment">
-              <div className="fitem cursor-pointer hover:underline hover:underline-offset-4 active:text-blue-500">
-                Entertainment
-              </div>
-            </a>
-            {/* <a href="/general">
-                <div className="fitem cursor-pointer hover:underline hover:underline-offset-4 ">
-                  General
-                </div>
-              </a> */}
-            <a href="/health">
-              <div className="fitem cursor-pointer hover:underline hover:underline-offset-4 active:text-blue-500">
-                Health
-              </div>
-            </a>
-            <a href="/science">
-              <div className="fitem cursor-pointer hover:underline hover:underline-offset-4 active:text-blue-500">
-                Science
-              </div>
-            </a>
-            <a href="/sports">
-              <div className="fitem cursor-pointer hover:underline hover:underline-offset-4 active:text-blue-500">
-                Sports
-              </div>
-            </a>
-            <a href="/technology">
-              <div className="fitem cursor-pointer hover:underline hover:underline-offset-4 active:text-blue-500">
-                Technology
-              </div>
-            </a>
           </div>
           <div
             className={
