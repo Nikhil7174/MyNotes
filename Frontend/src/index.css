@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 @layer components {
-    
-.myFocus{
+  .myFocus {
     color: aqua;
-    background-color: blue;
-}
-.Warning{
+    /* background-color: blue; */
+  }
+  .Warning {
     background-color: rgb(145, 52, 52);
-}
-.Success{
+  }
+  .Success {
     background-color: rgb(65, 144, 169);
-}}
+  }
+}
