@@ -8,7 +8,7 @@ export default function SignUp(props) {
     password: "",
     cpassword: "",
   });
-  const host = "http://localhost:5000";
+  const host = "https://my-notes-api-5qo0.onrender.com";
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {

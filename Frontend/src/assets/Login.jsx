@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login(props) {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-  const host = "http://localhost:5000";
+  const host = "https://my-notes-api-5qo0.onrender.com";
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
