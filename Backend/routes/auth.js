@@ -14,7 +14,7 @@ let JWT_SECRET = process.env.JWT_SECRET;
 router.post(
   "/createUser",
   [
-    body("name", "Enter a name of atleast 5 letters").isLength({ min: 5 }),
+    body("name", "Enter a name of atleast 5 letters").isLength({ min: 4 }),
     body("email", "Enter a valid email").isEmail(),
     body("password", "Enter a password of atleast 6 letters").isLength({
       min: 6,
